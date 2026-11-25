@@ -1,0 +1,25 @@
+{
+  "description": "Anthropic Claude model family (with local reasoning_effort stripper shim)",
+  "select": {
+    "family": [
+      "anthropic"
+    ],
+    "tools_only": true
+  },
+  "sort": "expensive",
+  "take": {
+    "first": 32
+  },
+  "tiers": {
+    "pro": "anthropic/claude-opus-5-5",
+    "flash": "anthropic/claude-sonnet-4-5",
+    "flash_lite": "anthropic/claude-haiku-4-5"
+  },
+  "launch": {
+    "model": "anthropic/claude-sonnet-4-5",
+    "strip_effort": true
+  },
+  "probe": {
+    "drop_failures": true
+  }
+}

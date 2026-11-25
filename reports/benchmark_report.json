@@ -1,0 +1,256 @@
+{
+  "timestamp": 1794429054.265527,
+  "gateway": "https://cloud-api.near.ai/v1",
+  "models": {
+    "Qwen/Qwen3.8-27B": {
+      "tasks": {
+        "sec_audit": {
+          "passed": true,
+          "latency_ms": 27228,
+          "prompt_tokens": 139,
+          "completion_tokens": 2048,
+          "cost_usd": 0.00277036,
+          "error": ""
+        },
+        "red_team": {
+          "passed": true,
+          "latency_ms": 30119,
+          "prompt_tokens": 109,
+          "completion_tokens": 2048,
+          "cost_usd": 0.00276916,
+          "error": ""
+        },
+        "ast_refactor": {
+          "passed": true,
+          "latency_ms": 28872,
+          "prompt_tokens": 125,
+          "completion_tokens": 2048,
+          "cost_usd": 0.0027697999999999998,
+          "error": ""
+        },
+        "algo_math": {
+          "passed": true,
+          "latency_ms": 30532,
+          "prompt_tokens": 119,
+          "completion_tokens": 2048,
+          "cost_usd": 0.00276956,
+          "error": ""
+        },
+        "json_schema": {
+          "passed": false,
+          "latency_ms": 4704,
+          "prompt_tokens": 128,
+          "completion_tokens": 301,
+          "cost_usd": 0.00041147,
+          "error": ""
+        }
+      },
+      "total_latency": 121455,
+      "total_cost": 0.01149035,
+      "passed_count": 4,
+      "is_tee": true,
+      "avg_latency_ms": 24291,
+      "avg_cost_usd": 0.00229807
+    },
+    "Qwen/Qwen3.8-27B-abliterated": {
+      "tasks": {
+        "sec_audit": {
+          "passed": true,
+          "latency_ms": 24625,
+          "prompt_tokens": 139,
+          "completion_tokens": 1351,
+          "cost_usd": 0.0018294099999999998,
+          "error": ""
+        },
+        "red_team": {
+          "passed": true,
+          "latency_ms": 37334,
+          "prompt_tokens": 109,
+          "completion_tokens": 2048,
+          "cost_usd": 0.00276916,
+          "error": ""
+        },
+        "ast_refactor": {
+          "passed": true,
+          "latency_ms": 38697,
+          "prompt_tokens": 125,
+          "completion_tokens": 2048,
+          "cost_usd": 0.0027697999999999998,
+          "error": ""
+        },
+        "algo_math": {
+          "passed": true,
+          "latency_ms": 18923,
+          "prompt_tokens": 119,
+          "completion_tokens": 1039,
+          "cost_usd": 0.00140741,
+          "error": ""
+        },
+        "json_schema": {
+          "passed": false,
+          "latency_ms": 5628,
+          "prompt_tokens": 128,
+          "completion_tokens": 304,
+          "cost_usd": 0.00041552,
+          "error": ""
+        }
+      },
+      "total_latency": 125207,
+      "total_cost": 0.0091913,
+      "passed_count": 4,
+      "is_tee": true,
+      "avg_latency_ms": 25041,
+      "avg_cost_usd": 0.00183826
+    },
+    "anthropic/claude-sonnet-4-5": {
+      "tasks": {
+        "sec_audit": {
+          "passed": true,
+          "latency_ms": 15869,
+          "prompt_tokens": 108,
+          "completion_tokens": 896,
+          "cost_usd": 0.013764,
+          "error": ""
+        },
+        "red_team": {
+          "passed": true,
+          "latency_ms": 41978,
+          "prompt_tokens": 72,
+          "completion_tokens": 2048,
+          "cost_usd": 0.030936,
+          "error": ""
+        },
+        "ast_refactor": {
+          "passed": true,
+          "latency_ms": 15443,
+          "prompt_tokens": 95,
+          "completion_tokens": 1246,
+          "cost_usd": 0.018975000000000002,
+          "error": ""
+        },
+        "algo_math": {
+          "passed": true,
+          "latency_ms": 7592,
+          "prompt_tokens": 82,
+          "completion_tokens": 455,
+          "cost_usd": 0.007071,
+          "error": ""
+        },
+        "json_schema": {
+          "passed": true,
+          "latency_ms": 1377,
+          "prompt_tokens": 87,
+          "completion_tokens": 59,
+          "cost_usd": 0.001146,
+          "error": ""
+        }
+      },
+      "total_latency": 82259,
+      "total_cost": 0.071892,
+      "passed_count": 5,
+      "is_tee": false,
+      "avg_latency_ms": 16451,
+      "avg_cost_usd": 0.0143784
+    },
+    "deepseek/deepseek-v4.1-flash": {
+      "tasks": {
+        "sec_audit": {
+          "passed": true,
+          "latency_ms": 15649,
+          "prompt_tokens": 112,
+          "completion_tokens": 1965,
+          "cost_usd": 0.0023916,
+          "error": ""
+        },
+        "red_team": {
+          "passed": false,
+          "latency_ms": 17050,
+          "prompt_tokens": 85,
+          "completion_tokens": 2048,
+          "cost_usd": 0.0024831,
+          "error": ""
+        },
+        "ast_refactor": {
+          "passed": true,
+          "latency_ms": 12335,
+          "prompt_tokens": 109,
+          "completion_tokens": 2048,
+          "cost_usd": 0.0024903,
+          "error": ""
+        },
+        "algo_math": {
+          "passed": true,
+          "latency_ms": 13000,
+          "prompt_tokens": 98,
+          "completion_tokens": 1999,
+          "cost_usd": 0.0024282,
+          "error": ""
+        },
+        "json_schema": {
+          "passed": true,
+          "latency_ms": 3345,
+          "prompt_tokens": 106,
+          "completion_tokens": 330,
+          "cost_usd": 0.0004278,
+          "error": ""
+        }
+      },
+      "total_latency": 61379,
+      "total_cost": 0.010221,
+      "passed_count": 4,
+      "is_tee": false,
+      "avg_latency_ms": 12275,
+      "avg_cost_usd": 0.0020442
+    },
+    "openai/gpt-5.6-sol": {
+      "tasks": {
+        "sec_audit": {
+          "passed": true,
+          "latency_ms": 9724,
+          "prompt_tokens": 87,
+          "completion_tokens": 773,
+          "cost_usd": 0.015808000000000003,
+          "error": ""
+        },
+        "red_team": {
+          "passed": true,
+          "latency_ms": 20979,
+          "prompt_tokens": 59,
+          "completion_tokens": 1502,
+          "cost_usd": 0.030276,
+          "error": ""
+        },
+        "ast_refactor": {
+          "passed": true,
+          "latency_ms": 20247,
+          "prompt_tokens": 74,
+          "completion_tokens": 1635,
+          "cost_usd": 0.032996,
+          "error": ""
+        },
+        "algo_math": {
+          "passed": true,
+          "latency_ms": 4298,
+          "prompt_tokens": 70,
+          "completion_tokens": 364,
+          "cost_usd": 0.007560000000000001,
+          "error": ""
+        },
+        "json_schema": {
+          "passed": true,
+          "latency_ms": 1472,
+          "prompt_tokens": 81,
+          "completion_tokens": 34,
+          "cost_usd": 0.0010040000000000001,
+          "error": ""
+        }
+      },
+      "total_latency": 56720,
+      "total_cost": 0.087644,
+      "passed_count": 5,
+      "is_tee": false,
+      "avg_latency_ms": 11344,
+      "avg_cost_usd": 0.0175288
+    }
+  }
+}

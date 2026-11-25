@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+# nearai-verify-chat -- run an attested /chat/completions call and verify /signature/{chat_id}
+set -euo pipefail
+
+_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+_ROOT="$(cd "$_DIR/.." && pwd)"
+_DEFAULT_MODEL="${NEARAI_VERIFY_MODEL:-Qwen/Qwen3.8-27B}"
+
+if [[ -x "$_ROOT/.venv/bin/python" ]]; then
+  _PY="$_ROOT/.venv/bin/python"
+elif command -v python3 >/dev/null 2>&1; then
+  _PY="python3"
+else
+  printf '%s\n' "nearai-verify-chat: python3 not found" >&2
+  exit 1
+fi
+
+if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
+  exec "$_PY" "$_ROOT/nearai_agy.py" verify-chat --help
+fi
+
+if [[ $# -eq 0 || "${1:-}" == -* ]]; then
+  exec "$_PY" "$_ROOT/nearai_agy.py" verify-chat "$_DEFAULT_MODEL" "$@"
+fi
+
+exec "$_PY" "$_ROOT/nearai_agy.py" verify-chat "$@"

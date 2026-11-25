@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.venv/
+venv/
+dist/
+build/
+*.egg-info/
+
+# macOS / Editor
+.DS_Store
+*.swp
+*~
+
+# Local secrets / overrides / internal notes (never commit API keys)
+.env
+.env.*
+config.json
+*.key
+ResumeWork.md

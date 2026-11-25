@@ -1,0 +1,27 @@
+{
+  "description": "Most capable agy-verified models first, including Claude via local shim (includes external non-TEE providers)",
+  "select": {
+    "tools_only": true
+  },
+  "take": {
+    "first": 32
+  },
+  "tiers": {
+    "pro": "openai/gpt-5.6-sol",
+    "flash": "anthropic/claude-sonnet-4-5",
+    "flash_lite": "google/gemini-3.5-flash"
+  },
+  "launch": {
+    "model": "openai/gpt-5.6-sol",
+    "strip_effort": true
+  },
+  "probe": {
+    "drop_failures": true
+  },
+  "sort": "expensive",
+  "include": [
+    "openai/gpt-5.6-sol",
+    "anthropic/claude-sonnet-4-5",
+    "google/gemini-3.5-flash"
+  ]
+}

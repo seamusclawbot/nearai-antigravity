@@ -1,0 +1,25 @@
+{
+  "description": "Qwen model family, verified tool-capable models",
+  "select": {
+    "family": [
+      "qwen"
+    ],
+    "chat_only": true
+  },
+  "include": [
+    "Qwen/Qwen3.8-27B",
+    "Qwen/Qwen3.8-27B-abliterated",
+    "Qwen/Qwen3.6-35B-A3B-FP8"
+  ],
+  "tiers": {
+    "pro": "Qwen/Qwen3.8-27B",
+    "flash": "Qwen/Qwen3.8-27B-abliterated",
+    "flash_lite": "Qwen/Qwen3.6-35B-A3B-FP8"
+  },
+  "launch": {
+    "model": "Qwen/Qwen3.8-27B"
+  },
+  "probe": {
+    "drop_failures": true
+  }
+}

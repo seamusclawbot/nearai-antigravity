@@ -1,0 +1,93 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Test (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12", "3.13"]
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install test runner
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest
+
+      - name: Verify compilation (stdlib only)
+        run: |
+          python -m py_compile nearai_agy.py attestation_evidence.py verifiers/*.py
+
+      - name: Run core offline unit test suite (stdlib only)
+        run: |
+          pytest -v --ignore=tests/test_cryptographic_verifiers.py
+
+      - name: Install optional cryptographic verifier dependencies
+        run: |
+          pip install -r requirements-verifier.txt
+
+      - name: Run cryptographic verifier test suite
+        run: |
+          pytest -v tests/test_cryptographic_verifiers.py
+
+      - name: Verify package installation and console entry point
+        run: |
+          pip install --no-deps .
+          nearai-agy --version
+          nearai-agy list-profiles > /dev/null
+          (cd "${RUNNER_TEMP}" && XDG_CONFIG_HOME="${RUNNER_TEMP}/pkg-cfg" nearai-agy init < /dev/null > /dev/null && XDG_CONFIG_HOME="${RUNNER_TEMP}/pkg-cfg" nearai-agy list-profiles > /dev/null)
+
+      - name: Verify bash forwarder and example script syntax
+        run: |
+          for f in bin/nearai-*; do
+            bash -n "$f"
+          done
+          for f in examples/*.sh; do
+            bash -n "$f"
+          done
+
+      - name: Run doctor and plugin dry-run checks
+        run: |
+          python nearai_agy.py doctor
+          python nearai_agy.py pro setup --dry-run
+
+      - name: Run offline build dry-run check with seeded catalog cache
+        run: |
+          python - <<'PY'
+          import json, os, time
+          from pathlib import Path
+          import nearai_agy as n
+          cache_dir = Path(os.environ["RUNNER_TEMP"]) / "nearai-agy"
+          cache_dir.mkdir(parents=True, exist_ok=True)
+          raw_entries = [
+              ({"id": "Qwen/Qwen3.8-27B", "architecture": {"inputModalities": ["text"], "outputModalities": ["text"]}, "supported_features": ["tools"], "context_length": 262144, "pricing": {"prompt": "0.000001", "completion": "0.000002"}}, {"provider_type": "vllm", "verifiable": True, "attestation_supported": True}),
+              ({"id": "anthropic/claude-sonnet-4-5", "architecture": {"inputModalities": ["text"], "outputModalities": ["text"]}, "supported_features": ["tools"], "context_length": 200000, "pricing": {"prompt": "0.000003", "completion": "0.000015"}}, {"provider_type": "external", "verifiable": False, "attestation_supported": False}),
+              ({"id": "openai/gpt-5.6-sol", "architecture": {"inputModalities": ["text"], "outputModalities": ["text"]}, "supported_features": ["tools"], "context_length": 1050000, "pricing": {"prompt": "0.000002", "completion": "0.00001"}}, {"provider_type": "external", "verifiable": False, "attestation_supported": False}),
+          ]
+          models = [n._normalize_model(e, p) for e, p in raw_entries]
+          now = time.time()
+          (cache_dir / "models.json").write_text(json.dumps({"fetched_at": now, "models": models}), encoding="utf-8")
+          probes = {m["id"]: {"ok": True, "code": 200, "error": "", "at": now, "verdict": True} for m in models}
+          (cache_dir / "probe.json").write_text(json.dumps(probes), encoding="utf-8")
+          PY
+          XDG_CONFIG_HOME="${RUNNER_TEMP}/cfg" XDG_CACHE_HOME="${RUNNER_TEMP}" python nearai_agy.py build --all-profiles --offline --dry-run > /dev/null

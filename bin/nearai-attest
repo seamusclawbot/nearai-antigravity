@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# nearai-attest -- run preflight attestation & cryptographic TDX/GPU verification
+set -euo pipefail
+
+_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+_ROOT="$(cd "$_DIR/.." && pwd)"
+
+if [[ -x "$_ROOT/.venv/bin/python" ]]; then
+  _PY="$_ROOT/.venv/bin/python"
+elif command -v python3 >/dev/null 2>&1; then
+  _PY="python3"
+else
+  printf '%s\n' "nearai-attest: python3 not found" >&2
+  exit 1
+fi
+
+if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
+  exec "$_PY" "$_ROOT/nearai_agy.py" attest-evidence --help
+fi
+
+exec "$_PY" "$_ROOT/nearai_agy.py" attest-evidence --verify-crypto "$@"

@@ -1,0 +1,63 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nearai-antigravity"
+version = "1.0.0"
+description = "Bridge NEAR AI Cloud (including hardware-attested TEE models) with Google Antigravity CLI, IDE, and Desktop App."
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.9"
+dependencies = []
+keywords = [
+    "near-ai",
+    "antigravity",
+    "agy",
+    "tee",
+    "confidential-computing",
+    "openai",
+    "llm",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: MacOS",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Security :: Cryptography",
+    "Topic :: Software Development :: Build Tools",
+]
+
+[project.optional-dependencies]
+verifiers = [
+    "cryptography>=42.0.0",
+    "PyJWT>=2.8.0",
+    "dcap-qvl>=0.3.2",
+    "eth-account>=0.13.0",
+]
+dev = [
+    "pytest>=8.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/seamusclawbot/nearai-antigravity"
+Repository = "https://github.com/seamusclawbot/nearai-antigravity"
+Issues = "https://github.com/seamusclawbot/nearai-antigravity/issues"
+
+[project.scripts]
+nearai-agy = "nearai_agy:main"
+
+[tool.setuptools]
+py-modules = ["nearai_agy", "attestation_evidence"]
+packages = ["verifiers"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

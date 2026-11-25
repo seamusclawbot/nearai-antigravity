@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# nearai-private-check -- run cryptographic attestation + verified-chat preflight for private profile
+set -euo pipefail
+
+_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+_ROOT="$(cd "$_DIR/.." && pwd)"
+_MODEL="${1:-${NEARAI_PRIVATE_MODEL:-Qwen/Qwen3.8-27B}}"
+
+if [[ -x "$_ROOT/.venv/bin/python" ]]; then
+  _PY="$_ROOT/.venv/bin/python"
+elif command -v python3 >/dev/null 2>&1; then
+  _PY="python3"
+else
+  printf '%s\n' "nearai-private-check: python3 not found" >&2
+  exit 1
+fi
+
+"$_PY" "$_ROOT/nearai_agy.py" attest-evidence "$_MODEL" --verify-crypto
+"$_PY" "$_ROOT/nearai_agy.py" verify-chat "$_MODEL"

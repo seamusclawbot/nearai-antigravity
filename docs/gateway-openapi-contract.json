@@ -1,0 +1,1 @@
+{"paths":["/v1/models","/v1/chat/completions","/v1/completions","/v1/attestation/report","/v1/attestation/pins","/v1/attestation/ita-token","/v1/signature/{chat_id}"],"required_schema_terms":["report_data","quote_b64","certificate_b64","e2e_pubkey","gpu_evidence","jwks_url","policy_must_match","request_hash","response_hash"]}

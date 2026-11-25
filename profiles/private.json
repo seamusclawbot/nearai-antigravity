@@ -1,0 +1,17 @@
+{
+  "description": "Hardware-attested TEE models only (vllm / chutes / tinfoil), tool-capable",
+  "select": {
+    "tools_only": true,
+    "tee_only": true
+  },
+  "attestation_required": true,
+  "take": {
+    "first": 32
+  },
+  "launch": {
+    "model": "Qwen/Qwen3.8-27B"
+  },
+  "probe": {
+    "drop_failures": true
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "description": "Cheapest tool-capable, agy-verified models, low cost per token",
+  "select": {
+    "tools_only": true
+  },
+  "sort": "cheap",
+  "count": 8,
+  "launch": {
+    "model": ""
+  },
+  "probe": {
+    "drop_failures": true
+  }
+}

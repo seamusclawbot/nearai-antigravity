@@ -1,0 +1,5 @@
+# Optional cryptographic verifier dependencies for NEAR AI Gateway attestation
+cryptography>=42.0.0
+PyJWT>=2.8.0
+dcap-qvl>=0.3.2
+eth-account>=0.13.0
